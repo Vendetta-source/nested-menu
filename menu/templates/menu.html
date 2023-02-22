@@ -1,17 +1,10 @@
 {% load menu_tags %}
-{% if menu_item.menu_name %}
-<p>{{menu_item.menu_name}}</p>
+{% load static %}
+{% if menu_tree.0.menu_name %}
+<p>{{menu_tree.0.menu_name}}</p>
 {% endif %}
-<a href="{% url 'index' menu_item.pk %}">{{ menu_item.title }}</a>
-{% if menu_item.children %}
-<details {% if menu_item.pk in unwrapped_menu_item_ids %} open {% endif %}>
-    <summary>
-        {{ menu_item.title }}
-    </summary>
-    {% for child in menu_item.children %}
-    <div class="menu_item">
-        <p>{% draw_menu_item_children child.pk %}</p>
-    </div>
-    {% endfor %}
-</details>
-{% endif %}
+<ul>
+    {% autoescape off %}
+    {% render_menu menu_tree %}
+    {% endautoescape %}
+</ul>
