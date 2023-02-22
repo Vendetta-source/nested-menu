@@ -1,5 +1,5 @@
 from django.shortcuts import render
 
 
-def index(request, pk=-1):
-    return render(request, 'index.html', {'pk': pk})
+def index(request, item=None):
+    return render(request, 'index.html', {'item': item})

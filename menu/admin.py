@@ -1,16 +1,17 @@
 from django.contrib import admin
-from menu.models import ItemMenu
-from menu.forms import ItemMenuForm
+from menu.models import MenuItem, Menu
 
 
-class ItemMenuInline(admin.StackedInline):
-    model = ItemMenu
-    form = ItemMenuForm
+class MenuItemAdmin(admin.ModelAdmin):
+    # form = MenuItemForm
+    list_display = ('name', 'menu_name', 'parent', 'url')
+    list_filter = ('menu_name', 'parent',)
+    prepopulated_fields = {'url': ('name',)}
+
+    def save_model(self, request, obj, form, change):
+        obj.url = '/' + obj.menu_name.name + '/' + obj.url + '/'
+        obj.save()
 
 
-class ItemMenuAdmin(admin.ModelAdmin):
-    inlines = [ItemMenuInline]
-    form = ItemMenuForm
-
-
-admin.site.register(ItemMenu, ItemMenuAdmin)
+admin.site.register(MenuItem, MenuItemAdmin)
+admin.site.register(Menu)
