@@ -20,3 +20,21 @@
 ~~~
 pip install -r requirements.txt
 ~~~
+Для просмотра количества запросов в БД был установлен Django Debug Toolbar.
+
+-------
+Заполнение БД:
+~~~
+python manage.py migrate
+python manage.py loaddata data.json
+~~~
+------
+Скриншоты:
+![image](https://user-images.githubusercontent.com/63292154/220752518-a36107bc-caf6-41f2-bd4c-5dcc266da570.png)
+![image](https://user-images.githubusercontent.com/63292154/220752657-6f4f0cad-1865-443c-a38c-5fc489c9131d.png)
+
+
+
+Как видно, на отрисовку каждого меню расходуется только 1 запрос к БД (на странице 2 меню)
+![image](https://user-images.githubusercontent.com/63292154/220752805-677d7dfd-eeaf-481a-9b82-f49e1302fa7d.png)
+
